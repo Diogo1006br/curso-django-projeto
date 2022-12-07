@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Menu popup customizado</title>
+    <style>
+        #divMenu {
+            font: normal 20pt Calibri;
+            border: 1px dotted blue;
+            width: 200px;
+            padding: 0;
+            position: absolute;
+            background: rgba(133, 192, 242, 0.54) url('background.jpg');
+            background-position: -1100px -200px;
+            visibility: hidden;
+        }
+
+        #divMenu ul {
+            list-style-type: none;
+            margin: 0;
+            line-height: 50px;
+            padding: 0;
+            text-align: center;
+        }
+
+        #divMenu>ul>li {
+            cursor: pointer;
+        }
+
+        #divMenu>ul>li:nth-child(n < 3) {
+            border-bottom: 1px dotted;
+        }
+
+        #divMenu>ul>li:hover {
+            background-color: rgba(133, 192, 242, 0.7);
+        }
+    </style>
+
+    <script>
+        function mostrarMenu() {
+            var X = event.clientX;
+            var Y = event.clientY;
+
+            var menu = document.getElementById("exampleModal");
+
+            menu.style.top = Y.toString() + "px";
+            menu.style.left = X.toString() + "px";
+            menu.style.visibility = "visible";
+
+            var lis = document.querySelectorAll("#exampleModal > ul > li");
+            for (var i = 0; i < lis.length; i++) {
+                lis.item(i).addEventListener("click", function () {
+                    menu.style.visibility = "hidden";
+                });
+            }
+        }
+
+        window.onload = function () {
+            document.addEventListener("click",
+                function () {
+                    document.getElementById("exampleModal").style.visibility = "hidden";
+                }
+            );
+        }
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Success to unlock this page
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Launch demo modal
+                </button>
+            </div>
+        </div>
+    </div>
+
+</html>
