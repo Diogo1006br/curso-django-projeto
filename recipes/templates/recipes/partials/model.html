@@ -2,104 +2,103 @@
 
 <html>
 
-<head>
-    <meta charset="utf-8" />
-    <title>Menu popup customizado</title>
-    <style>
-        #divMenu {
-            font: normal 20pt Calibri;
-            border: 1px dotted blue;
-            width: 200px;
-            padding: 0;
-            position: absolute;
-            background: rgba(133, 192, 242, 0.54) url('background.jpg');
-            background-position: -1100px -200px;
-            visibility: hidden;
-        }
+<body>
 
-        #divMenu ul {
-            list-style-type: none;
-            margin: 0;
-            line-height: 50px;
-            padding: 0;
-            text-align: center;
-        }
+    <head>
+        <style>
+            .modal-container {
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, .5);
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                z-index: 2000;
+                display: none;
+                justify-content: center;
+                align-items: center;
+            }
 
-        #divMenu>ul>li {
-            cursor: pointer;
-        }
+            .modal-container.mostrar {
+                display: flex;
+            }
 
-        #divMenu>ul>li:nth-child(n < 3) {
-            border-bottom: 1px dotted;
-        }
+            .modal {
+                background: white;
+                width: 60%;
+                min-width: 300px;
+                padding: 40px;
+                border: 10px solid #988b7a;
+                box-shadow: 0 0 0 10px white;
+                position: relative;
+            }
 
-        #divMenu>ul>li:hover {
-            background-color: rgba(133, 192, 242, 0.7);
-        }
-    </style>
+            @keyframes modal {
+                from {
+                    opacity: 0;
+                    transform: translate3d(0, -60px, 0);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translate3d(0, 0, 0);
+                }
+            }
+
+            .mostrar .modal {
+                animation: modal .3s;
+            }
+
+            .fechar {
+                position: absolute;
+                font-size: 1.2em;
+                top: -30px;
+                right: -30px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: 4px solid white;
+                background: #988b7a;
+                color: white;
+                font-family: "PT Mono", monospace;
+                cursor: pointer;
+                box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .3);
+            }
+        </style>
+
+
+    </head>
+
+    <div id="modal-promocao" class="modal-container">
+        <div class="modal">
+            <button class="fechar">x</button>
+            <h3 class="subtitulo">Cadastre-se na Newsletter</h3>
+            <form>
+                <input type="text" class="input" placeholder="Email">
+                <input type="button" class="button" value="Cadastrar">
+            </form>
+        </div>
+    </div>
 
     <script>
-        function mostrarMenu() {
-            var X = event.clientX;
-            var Y = event.clientY;
 
-            var menu = document.getElementById("exampleModal");
-
-            menu.style.top = Y.toString() + "px";
-            menu.style.left = X.toString() + "px";
-            menu.style.visibility = "visible";
-
-            var lis = document.querySelectorAll("#exampleModal > ul > li");
-            for (var i = 0; i < lis.length; i++) {
-                lis.item(i).addEventListener("click", function () {
-                    menu.style.visibility = "hidden";
-                });
-            }
-        }
-
-        window.onload = function () {
-            document.addEventListener("click",
-                function () {
-                    document.getElementById("exampleModal").style.visibility = "hidden";
+        function iniciaModal(modalID) {
+            const modal = document.getElementById(modalID);
+            modal.classList.add('mostrar');
+            modal.addEventListener('click', (evento) => {
+                if (e.target.id == modalId) {
+                    modal.classList.remove('mostrar');
                 }
-            );
+
+            });
+
         }
 
+        const logo = document.querySelector('.recipe-footer');
+        logo.addEventListener('click', () => inicialModal('modal-promocao'));
 
 
     </script>
-
-</head>
-
-<body>
-
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Success to unlock this page
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Launch demo modal
-                </button>
-            </div>
-        </div>
-    </div>
+</body>
 
 </html>
